@@ -1,4 +1,5 @@
 # vanilla-js
 Vanilla JS projects
 
-1. Form Validator
+*Form Validator
+*Movie Seat Booking
