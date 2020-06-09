@@ -4,7 +4,7 @@ const count = document.querySelector(".count");
 const total = document.querySelector(".price");
 const movieSelect = document.getElementById("movie");
 
-let ticketPrice = +movieSelect.value; //prse a string to an int by prefixing '+'
+let ticketPrice = +movieSelect.value; //parse a string to an int by prefixing '+'
 
 populateUI();
 
