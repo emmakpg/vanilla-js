@@ -1,22 +1,62 @@
 const container = document.querySelector(".container");
-const seats = document.querySelectorAll(".row.seat:not(.occupied)");
+const seats = document.querySelectorAll(".row .seat:not(.occupied)");
 const count = document.querySelector(".count");
 const total = document.querySelector(".price");
 const movieSelect = document.getElementById("movie");
 
 let ticketPrice = +movieSelect.value; //prse a string to an int by prefixing '+'
-console.log(ticketPrice);
+
+populateUI();
+
+//Get data afrom storage and populate UI
+function populateUI() {
+  const selectedSeats = JSON.parse(localStorage.getItem("selectedSeats"));
+  console.log(selectedSeats);
+
+  if (selectedSeats !== null && selectedSeats.length > 0) {
+    seats.forEach((seat, index) => {
+      if (selectedSeats.indexOf(index) > -1) {
+        seat.classList.add("selected");
+      }
+    });
+  }
+
+  movieSelectedIndex = localStorage.getItem("movieSelectedIndex");
+  moviePrice = localStorage.getItem("moviePrice");
+  const seatCount = selectedSeats.length;
+  const totalPrice = seatCount * moviePrice;
+
+  //set in UI
+  movieSelect.selectedIndex = movieSelectedIndex;
+  // count.innerText = seatCount;
+  // total.innerText = totalPrice;
+}
 
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll(".row .seat.selected");
+
+  const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
+
+  localStorage.setItem("selectedSeats", JSON.stringify(seatsIndex));
+
+  console.log(seatsIndex);
+
   const selectedSeatsCount = selectedSeats.length;
   count.innerText = selectedSeatsCount;
-  total.innerText = selectedSeatsCount * ticketPrice;
+  const totalPrice = selectedSeatsCount * ticketPrice;
+  total.innerText = totalPrice;
+}
+
+function saveMovieData(movieSelectedIndex, moviePrice) {
+  localStorage.setItem("movieSelectedIndex", movieSelectedIndex);
+  localStorage.setItem("moviePrice", moviePrice);
 }
 
 //Movie select event
 movieSelect.addEventListener("change", (e) => {
   ticketPrice = +e.target.value;
+  console.log(e.target.selectedIndex);
+  saveMovieData(e.target.selectedIndex, e.target.value);
   updateSelectedCount();
 });
 
@@ -31,3 +71,6 @@ container.addEventListener("click", (e) => {
     updateSelectedCount();
   }
 });
+
+//On page load update count and UI
+updateSelectedCount();
