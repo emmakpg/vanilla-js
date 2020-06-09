@@ -13,7 +13,7 @@ function populateUI() {
   const selectedSeats = JSON.parse(localStorage.getItem("selectedSeats"));
   console.log(selectedSeats);
 
-  if (selectedSeats !== null && selectedSeats.length > 0) {
+  if (selectedSeats != null) {
     seats.forEach((seat, index) => {
       if (selectedSeats.indexOf(index) > -1) {
         seat.classList.add("selected");
@@ -23,13 +23,9 @@ function populateUI() {
 
   movieSelectedIndex = localStorage.getItem("movieSelectedIndex");
   moviePrice = localStorage.getItem("moviePrice");
-  const seatCount = selectedSeats.length;
-  const totalPrice = seatCount * moviePrice;
 
   //set in UI
   movieSelect.selectedIndex = movieSelectedIndex;
-  // count.innerText = seatCount;
-  // total.innerText = totalPrice;
 }
 
 function updateSelectedCount() {
