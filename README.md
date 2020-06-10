@@ -2,5 +2,5 @@
 
 Vanilla JS projects
 
-- [Form Validator](https://nervous-noether-35df97.netlify.app/ "preview")
-- [Movie Seat Booking](https://naughty-wilson-01235d.netlify.app/ "preview")
+- [Form Validator](https://formvalidator1.netlify.app/ "preview")
+- [Movie Seat Booking](https://movieseatapp.netlify.app/ "preview")
