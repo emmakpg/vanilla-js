@@ -66,7 +66,7 @@ body {
   font-weight: 600;
 }
 
-.mycalculator .calbody #operator {
+#operator {
   background-color: yellow;
   color: red;
   font-weight: 600;
@@ -76,7 +76,17 @@ input[type="button"]:hover {
   background-color: yellow;
   color: red;
 }
-.mycalculator .calbody #operator:hover {
+#operator:hover {
   background-color: green;
+  color: whitesmoke;
+}
+
+#equals {
+  background-color: whitesmoke;
+  color: black;
+  grid-area: 5/3/5/5;
+}
+#equals:hover {
+  background-color: darkblue;
   color: whitesmoke;
 }

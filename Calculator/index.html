@@ -20,7 +20,7 @@
           />
         </div>
         <div class="calbody">
-          <input type="button" id="operator" value="AC" onclick="clear()" />
+          <input type="button" id="operator" value="AC" onclick="clearDisp()" />
           <input type="button" id="operator" value="&divide;" onclick="operand('/')"/>
           <input type="button" id="operator" value="&times;" onclick="operand('*')"/>
           <input type="button" id="operator" value="&#8592" onclick="backspace()"/>
@@ -37,8 +37,8 @@
           <input type="button" value="1" onclick="disp(1)" />
           <input type="button" id="operator" value="." onclick="disp('.')" />
           <input type="button" id="operator" value="+/-" onclick="operand('+/-')"/>
-          <input type="button" value="0" />
-          <input type="button" id="operator" value="=" onclick="equals()"/>
+          <input type="button" value="0" onclick="disp(0)"/>
+          <input type="button" id="equals" value="=" onclick="equals()"/>
         </div>
       </form>
     </div>
