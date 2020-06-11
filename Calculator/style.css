@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.mycalculator {
+  width: 300px;
+  padding: 5px;
+  background-color: blue;
+  border-radius: 5px;
+}
+
+.mycalculator .header h2 {
+  color: whitesmoke;
+  text-align: center;
+  width: 300px;
+  padding: 5px;
+}
+
+.mycalculator .header input {
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  width: 100%;
+  padding: 5px;
+  font-size: 60px;
+  font-weight: bold;
+  text-align: right;
+  border-radius: 5px;
+  border: 1px solid green;
+}
+.mycalculator .header input::placeholder {
+  color: black;
+}
+
+.mycalculator .calbody {
+  background-color: blueviolet;
+  border-radius: 5px;
+  margin-top: 3px;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 3px;
+}
+
+.mycalculator .calbody input {
+  height: 60px;
+  font-size: 20px;
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.mycalculator .calbody #operator {
+  background-color: yellow;
+  color: red;
+  font-weight: 600;
+}
+
+input[type="button"]:hover {
+  background-color: yellow;
+  color: red;
+}
+.mycalculator .calbody #operator:hover {
+  background-color: green;
+  color: whitesmoke;
+}
