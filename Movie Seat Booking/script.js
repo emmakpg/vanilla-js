@@ -26,6 +26,9 @@ function populateUI() {
 
   //set in UI
   movieSelect.selectedIndex = movieSelectedIndex;
+  totalMoviePrice = moviePrice * selectedSeats.length;
+  count.innerText = selectedSeats.length;
+  total.innerText = totalMoviePrice;
 }
 
 function updateSelectedCount() {
@@ -67,6 +70,3 @@ container.addEventListener("click", (e) => {
     updateSelectedCount();
   }
 });
-
-//On page load update count and UI
-updateSelectedCount();
