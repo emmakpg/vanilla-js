@@ -46,4 +46,7 @@ function setVideoProgress() {
 }
 
 //stop video
-function stopVideo() {}
+function stopVideo() {
+  video.currentTime = 0;
+  video.pause();
+}
