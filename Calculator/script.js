@@ -1,7 +1,7 @@
 const display = document.querySelector("#display");
 
 function clearDisp() {
-  display.value = 0;
+  display.value = "";
 }
 
 function backspace() {
