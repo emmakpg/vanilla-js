@@ -26,9 +26,11 @@ function populateUI() {
 
   //set in UI
   movieSelect.selectedIndex = movieSelectedIndex;
-  totalMoviePrice = moviePrice * selectedSeats.length;
-  count.innerText = selectedSeats.length;
-  total.innerText = totalMoviePrice;
+  if (selectedSeats != null) {
+    totalMoviePrice = moviePrice * selectedSeats.length;
+    count.innerText = selectedSeats.length;
+    total.innerText = totalMoviePrice;
+  }
 }
 
 function updateSelectedCount() {
@@ -38,7 +40,7 @@ function updateSelectedCount() {
 
   localStorage.setItem("selectedSeats", JSON.stringify(seatsIndex));
 
-  console.log(seatsIndex);
+  //console.log(seatsIndex);
 
   const selectedSeatsCount = selectedSeats.length;
   count.innerText = selectedSeatsCount;
