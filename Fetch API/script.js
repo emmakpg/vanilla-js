@@ -32,10 +32,10 @@ function getUsers() {
       let disp = "<h2>Users</h2>";
       data.forEach(function (user) {
         disp += `
-        <ul>
-        <li>Name: ${user.firstName} ${user.lastName}</li>
-        <li>Gender: ${user.gender}</li>
-        <li>Age: ${user.age}</li>
+        <ul class="list-group mb-3">
+        <li class="list-group-item">Name: ${user.firstName} ${user.lastName}</li>
+        <li class="list-group-item">Gender: ${user.gender}</li>
+        <li class="list-group-item">Age: ${user.age}</li>
         </ul>
         `;
       });
@@ -48,10 +48,10 @@ function getPosts() {
   fetch("https://jsonplaceholder.typicode.com/posts")
     .then((res) => res.json())
     .then((data) => {
-      let disp = "<h2>Posts</h2>";
+      let disp = "<h2 class='mb-4'>Posts</h2>";
       data.forEach(function (post) {
         disp += `
-        <div>
+        <div class="card card-body mb-3">
         <h3>${post.title}</h3>
         <p> ${post.body}</p> 
         </div>
@@ -66,4 +66,14 @@ function addPost(e) {
 
   let title = document.getElementById("title").value;
   let post = document.getElementById("post").value;
+  fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ title: title, body: post }),
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data));
 }

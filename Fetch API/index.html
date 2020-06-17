@@ -3,31 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Fetch API</title>
   </head>
   <body>
-    <button id="get-text">Get Text</button>
+    <div class="container">
+      <h1 class="display-4 mb-6">Fetch API SandBox</h1>
 
-    <button id="getUsers">Get JSON Data</button>
+      <div class="d-flex">
+        <button class="btn btn-primary mr-4" id="get-text">Get Text</button>
 
-    <button id="getPosts">Get JSON Data</button>
-    <hr />
-    <p id="disp"></p>
+        <button class="btn btn-danger mr-4" id="getUsers">Get JSON Data</button>
 
-    <form action="" id="addPost">
-      <div>
-        <input type="text" name="" id="title" placeholder="Title" />
+        <button class="btn btn-warning" id="getPosts">Get Posts</button>
       </div>
-      <div>
-        <textarea
-          type="text"
-          name=""
-          id="post"
-          placeholder="Add Post"
-        ></textarea>
-      </div>
-      <input type="submit" value="submit" />
-    </form>
+      <hr />
+
+      <form class="mb-4" id="addPost">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            placeholder="Title"
+          />
+        </div>
+        <div class="form-group">
+          <textarea
+            type="text"
+            class="form-control"
+            id="post"
+            placeholder="Add Post"
+          ></textarea>
+        </div>
+        <input type="submit" class="btn-secondary" value="submit" />
+      </form>
+
+      <p id="disp"></p>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
