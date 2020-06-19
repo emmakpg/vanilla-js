@@ -6,3 +6,6 @@ Vanilla JS projects
 - [Movie Seat Booking](https://movieseatapp.netlify.app/ "preview")
 
 * [Calculator](https://ekaycalculator.netlify.app/ "preview")
+* Custom Video Player
+
+[Exhange Rate Calculator](https://ekexchangerate.netlify.app/ "preview")
