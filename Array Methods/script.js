@@ -1,7 +1,7 @@
 const addUserBtn = document.getElementById("add-user");
 const doubleBtn = document.getElementById("double");
 const showmilBtn = document.getElementById("show-millionaires");
-const sortBtn = document.getElementById("sort");
+const sortBtn = document.getElementById("sort-richest");
 const caltotalBtn = document.getElementById("calculate-wealth");
 const main = document.getElementById("main");
 
@@ -44,14 +44,28 @@ function formatMoney(num) {
   return num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
 }
 
+//Functions add user
+function addUser() {
+  userGenerator();
+}
+
+//function double money
+function doubleWealth() {
+  data = data.map((user) => {
+    return { user, money: user.money * 2 };
+  });
+  updateDOM();
+}
+
+//function sort Richest
+function sortRichest() {
+  // data = data.sort((a, b) => a - b);
+  console.log("joke");
+}
+
 //Event Listeners
 addUserBtn.addEventListener("click", addUser);
 doubleBtn.addEventListener("click", doubleWealth);
 showmilBtn.addEventListener("click", showMil);
 sortBtn.addEventListener("click", sortRichest);
 caltotalBtn.addEventListener("click", calTotal);
-
-//Functions
-function addUser() {
-  userGenerator();
-}
