@@ -59,13 +59,18 @@ function doubleWealth() {
 
 //function sort Richest
 function sortRichest() {
-  // data = data.sort((a, b) => a - b);
-  console.log("joke");
+  data = data.sort((a, b) => b.money - a.money);
+  updateDOM();
+}
+
+//function calculate total
+function calTotal() {
+  console.log("Working");
 }
 
 //Event Listeners
 addUserBtn.addEventListener("click", addUser);
 doubleBtn.addEventListener("click", doubleWealth);
-showmilBtn.addEventListener("click", showMil);
+//showmilBtn.addEventListener("click", showMil);
 sortBtn.addEventListener("click", sortRichest);
 caltotalBtn.addEventListener("click", calTotal);
