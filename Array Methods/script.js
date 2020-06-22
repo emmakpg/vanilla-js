@@ -32,7 +32,7 @@ function updateDOM(providedData = data) {
     //console.log(item);
     const element = document.createElement("div");
     element.classList.add("person");
-    element.innerHTML = `<strong>${item.name}</strong> GHC${formatMoney(
+    element.innerHTML = `<strong>${item.name}</strong> ${formatMoney(
       item.money
     )}<br>`;
     main.appendChild(element);
@@ -41,7 +41,7 @@ function updateDOM(providedData = data) {
 
 //function format number as currency
 function formatMoney(num) {
-  return num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+  return "GHC" + num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
 }
 
 //Functions add user
@@ -52,7 +52,7 @@ function addUser() {
 //function double money
 function doubleWealth() {
   data = data.map((user) => {
-    return { user, money: user.money * 2 };
+    return { ...user, money: user.money * 2 };
   });
   updateDOM();
 }
@@ -65,12 +65,26 @@ function sortRichest() {
 
 //function calculate total
 function calTotal() {
-  console.log("Working");
+  const total = data.reduce((acc, item) => (acc += item.money), 0);
+  //console.log(total);
+
+  const element = document.createElement("div");
+  element.classList.add("person");
+  element.innerHTML = `<h3>Total Wealth: <strong>${formatMoney(
+    total
+  )}</strong></h3>`;
+  main.appendChild(element);
+}
+
+//show only millionaires
+function showMil() {
+  data = data.filter((item) => item.money > 1000000);
+  updateDOM();
 }
 
 //Event Listeners
 addUserBtn.addEventListener("click", addUser);
 doubleBtn.addEventListener("click", doubleWealth);
-//showmilBtn.addEventListener("click", showMil);
+showmilBtn.addEventListener("click", showMil);
 sortBtn.addEventListener("click", sortRichest);
 caltotalBtn.addEventListener("click", calTotal);
