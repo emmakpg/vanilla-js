@@ -7,5 +7,7 @@ Vanilla JS projects
 
 * [Calculator](https://ekaycalculator.netlify.app/ "preview")
 * Custom Video Player
+* [Exhange Rate Calculator](https://ekexchangerate.netlify.app/ "preview")
 
-[Exhange Rate Calculator](https://ekexchangerate.netlify.app/ "preview")
+* Array Methods
+* Menu Slider and Modal
