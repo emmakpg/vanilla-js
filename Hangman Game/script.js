@@ -21,7 +21,7 @@ let selectedWord = words[Math.floor(Math.random() * words.length)];
 
 //console.log(selectedWord);
 
-const correctLetters = ["j", "a", "s", "m", "i", "n", "e"];
+let correctLetters = [];
 const wrongLetters = [];
 
 //show hidden word
@@ -45,11 +45,57 @@ function displayWord() {
   }
 }
 
+//show notification
+function showNotification() {
+  notification.classList.add("show");
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+  }, 2000);
+}
+
+//update wrong letters
+function updateWrongLetters() {
+  console.log(wrongLetters);
+
+  wronlettersEl.innerHTML = "<p>Wrong Letters</p>";
+  wrongLetters.forEach((letter) => {
+    wronlettersEl.innerHTML += `<span>${letter},</span>`;
+  });
+}
+
+//key down press
+window.addEventListener("keydown", (e) => {
+  //console.log(e.keyCode);
+  if (e.keyCode >= 65 && e.keyCode <= 95) {
+    const letter = e.key;
+
+    if (selectedWord.includes(letter)) {
+      if (!correctLetters.includes(letter)) {
+        correctLetters.push(letter);
+
+        displayWord();
+      } else {
+        showNotification();
+      }
+    } else {
+      if (!wrongLetters.includes(letter)) {
+        wrongLetters.push(letter);
+        updateWrongLetters();
+      } else {
+        showNotification();
+      }
+    }
+  }
+});
+
 displayWord();
 
 //function playAgain
 function playAgain() {
   popupEl.style.display = "none";
+  correctLetters = [];
+  displayWord();
 }
 
 //Event Listeners
