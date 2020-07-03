@@ -56,12 +56,31 @@ function showNotification() {
 
 //update wrong letters
 function updateWrongLetters() {
-  console.log(wrongLetters);
+  //console.log(wrongLetters);
 
+  //Outputs wrong letters
   wronlettersEl.innerHTML = "<p>Wrong Letters</p>";
+
   wrongLetters.forEach((letter) => {
     wronlettersEl.innerHTML += `<span>${letter},</span>`;
   });
+
+  //draw figure parts
+  figureParts.forEach((part, index) => {
+    const errors = wrongLetters.length;
+
+    if (index < errors) {
+      part.style.display = "block";
+    } else {
+      part.style.display = "none";
+    }
+  });
+
+  //Check if lost
+  if (wrongLetters.length === figureParts.length) {
+    finalMessageEl.innerText = "You've Lost!";
+    popupEl.style.display = "flex";
+  }
 }
 
 //key down press
@@ -94,7 +113,13 @@ displayWord();
 //function playAgain
 function playAgain() {
   popupEl.style.display = "none";
+  correctLetters.splice(0);
+  wrongLetters.splice(0);
   correctLetters = [];
+  wronlettersEl.innerHTML = "";
+  figureParts.forEach((part) => (part.style.display = "none"));
+
+  selectedWord = words[Math.floor(Math.random() * words.length)];
   displayWord();
 }
 
