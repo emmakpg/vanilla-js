@@ -4,17 +4,35 @@ const popupEl = document.getElementById("popup-container");
 const finalMessageEl = document.getElementById("final-message");
 const notification = document.getElementById("notification-container");
 const playAgainBtn = document.getElementById("play-again");
+const correctWord = document.getElementById("correct-word");
 
 const figureParts = document.querySelectorAll(".figure-part");
+
+winSound = new Audio("sounds/win.mp3");
+loseSound = new Audio("sounds/aww.mp3");
+letterSound = new Audio("sounds/swish.m4a");
 
 const words = [
   "application",
   "mental",
   "chelsea",
   "jasmine",
-  "emmanuel",
   "friend",
   "great",
+  "food",
+  "favorite",
+  "love",
+  "abysmal",
+  "decoy",
+  "manchester",
+  "Watford",
+  "liverpool",
+  "desperate",
+  "cringe",
+  "fabulous",
+  "mesmerize",
+  "ping",
+  "einstein",
 ];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
@@ -42,6 +60,7 @@ function displayWord() {
   if (innerWord === selectedWord) {
     finalMessageEl.innerText = "Congratulations, You Won!";
     popupEl.style.display = "flex";
+    winSound.play();
   }
 }
 
@@ -56,8 +75,6 @@ function showNotification() {
 
 //update wrong letters
 function updateWrongLetters() {
-  //console.log(wrongLetters);
-
   //Outputs wrong letters
   wronlettersEl.innerHTML = "<p>Wrong Letters</p>";
 
@@ -80,6 +97,8 @@ function updateWrongLetters() {
   if (wrongLetters.length === figureParts.length) {
     finalMessageEl.innerText = "You've Lost!";
     popupEl.style.display = "flex";
+    correctWord.innerHTML = `Correct word: <strong>${selectedWord}</strong>`;
+    loseSound.play();
   }
 }
 
@@ -87,6 +106,7 @@ function updateWrongLetters() {
 window.addEventListener("keydown", (e) => {
   //console.log(e.keyCode);
   if (e.keyCode >= 65 && e.keyCode <= 95) {
+    letterSound.play();
     const letter = e.key;
 
     if (selectedWord.includes(letter)) {
@@ -117,6 +137,7 @@ function playAgain() {
   wrongLetters.splice(0);
   correctLetters = [];
   wronlettersEl.innerHTML = "";
+  correctWord.innerHTML = "";
   figureParts.forEach((part) => (part.style.display = "none"));
 
   selectedWord = words[Math.floor(Math.random() * words.length)];
