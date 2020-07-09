@@ -1,17 +1,42 @@
 const search = document.getElementById("search");
-const searchBtn = document.getElementById("search-btn");
+const submit = document.getElementById("submit");
 const randomBtn = document.getElementById("random-btn");
+const resultsHd = document.getElementById("results-heading");
+const mealsEl = document.getElementById("meals");
+const singlemealEl = document.getElementById("single-meal");
 
 //functions
-function getDishes() {
-  fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata")
+async function getDishes(e) {
+  /* fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata")
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-    });
-
-  console.log("working");
+    }); */
+  e.preventDefault();
 }
 
+async function searchMeal(e) {
+  e.preventDefault();
+
+  //Clear single meal
+  singlemealEl.innerHTML = "";
+
+  //get search term
+  const term = search.value;
+  console.log(term);
+
+  //check empty
+
+  if (term.trim()) {
+    //fetch request
+    const res = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`
+    );
+    const data = await res.json();
+    console.log(data);
+  } else {
+    alert("Search input is empty!");
+  }
+}
 //Event Listeners
-searchBtn.addEventListener("click", getDishes);
+submit.addEventListener("submit", searchMeal);
