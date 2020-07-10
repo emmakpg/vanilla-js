@@ -25,8 +25,6 @@ async function searchMeal(e) {
   const term = search.value;
   console.log(term);
 
-  //check empty
-
   if (term.trim()) {
     //fetch request
     const res = await fetch(
@@ -34,6 +32,22 @@ async function searchMeal(e) {
     );
     const data = await res.json();
     console.log(data);
+    resultsHd.innerHTML = `<h1>Search results for '${term}':</h1>`;
+
+    if (data.meals == null) {
+      mealsEl.innerHTML = "";
+      resultsHd.innerHTML = `<p>'${term}' not found</p>`;
+    } else {
+      mealsEl.innerHTML = data.meals.map(
+        (meal) => `
+        <div class="meal">
+        <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+        <div class="meal-info" data=mealID=""${meal.idMeal}>
+        <h3>${meal.strMeal}</h3>
+        </div></div> 
+        `
+      );
+    }
   } else {
     alert("Search input is empty!");
   }
