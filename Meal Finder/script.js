@@ -11,6 +11,8 @@ function getDishes(e) {
 
   const term = search.value;
 
+  singlemealEl.innerHTML = "";
+
   if (term.trim()) {
     console.log(term);
 
@@ -50,7 +52,45 @@ function getMealByID(mealID) {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
+
+      const meal = data.meals[0];
+
+      addMealToDOM(meal);
     });
+}
+
+//add sngle meal to DOM
+
+function addMealToDOM(meal) {
+  const ingredients = [];
+
+  for (let i = 1; i <= 20; i++) {
+    if (meal[`strIngredient${i}`]) {
+      ingredients.push(
+        `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`
+      );
+    } else {
+      break;
+    }
+  }
+  console.log(ingredients);
+
+  singlemealEl.innerHTML = `<div>
+  <h1>${meal.strMeal}</h1>
+  <img src='${meal.strMealThumb}' alt='${meal.strMeal}'>
+  <div class='single-meal-info'>
+  ${meal.strCategory ? `<p>${meal.strCategory}</p>` : ""}
+  ${meal.strArea ? `<p>${meal.strArea}</p>` : ""}
+  </div>
+  <div class='main'>
+  <p>${meal.strInstructions}</p>
+  <h2>Ingredients</h2>
+  <ul>
+  ${ingredients.map((ingredient) => `<li>${ingredient}</li>`).join("")}
+  </ul>
+  </div>
+  </div>
+  `;
 }
 
 /* async function searchMeal(e) {
@@ -104,7 +144,7 @@ mealsEl.addEventListener("click", (e) => {
     }
   });
 
-  console.log(mealInfo);
+  //console.log(mealInfo);
 
   if (mealInfo) {
     const mealID = mealInfo.getAttribute("data-mealID");
