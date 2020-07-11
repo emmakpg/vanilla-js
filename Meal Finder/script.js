@@ -6,16 +6,54 @@ const mealsEl = document.getElementById("meals");
 const singlemealEl = document.getElementById("single-meal");
 
 //functions
-async function getDishes(e) {
-  /* fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata")
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    }); */
+function getDishes(e) {
   e.preventDefault();
+
+  const term = search.value;
+
+  if (term.trim()) {
+    console.log(term);
+
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        resultsHd.innerHTML = `<h1>Search results for '${term}':</h1>`;
+
+        if (data.meals == null) {
+          mealsEl.innerHTML = "";
+          resultsHd.innerHTML = `<h3>'${term}' not found:</h3>`;
+        } else {
+          mealsEl.innerHTML = data.meals
+            .map(
+              (meal) =>
+                ` <div class="meal">
+            <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+            <div class="meal-info" data-mealID=${meal.idMeal}>
+            <h3>${meal.strMeal}</h3>
+            </div></div> 
+            `
+            )
+            .join("");
+        }
+      });
+  } else {
+    alert("Search input is empty");
+  }
 }
 
-async function searchMeal(e) {
+//Fetch Single Meal
+function getMealByID(mealID) {
+  //fetch single meal
+  fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    });
+}
+
+/* async function searchMeal(e) {
   e.preventDefault();
 
   //Clear single meal
@@ -38,19 +76,41 @@ async function searchMeal(e) {
       mealsEl.innerHTML = "";
       resultsHd.innerHTML = `<p>'${term}' not found</p>`;
     } else {
-      mealsEl.innerHTML = data.meals.map(
-        (meal) => `
+      mealsEl.innerHTML = data.meals
+        .map(
+          (meal) =>
+            `
         <div class="meal">
         <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
         <div class="meal-info" data=mealID=""${meal.idMeal}>
         <h3>${meal.strMeal}</h3>
         </div></div> 
         `
-      );
+        )
+        .join("");
     }
   } else {
     alert("Search input is empty!");
   }
-}
+} */
 //Event Listeners
-submit.addEventListener("submit", searchMeal);
+submit.addEventListener("submit", getDishes);
+mealsEl.addEventListener("click", (e) => {
+  const mealInfo = e.path.find((item) => {
+    if (item.classList) {
+      return item.classList.contains("meal-info");
+    } else {
+      false;
+    }
+  });
+
+  console.log(mealInfo);
+
+  if (mealInfo) {
+    const mealID = mealInfo.getAttribute("data-mealID");
+
+    getMealByID(mealID);
+  } else {
+    return false;
+  }
+});
