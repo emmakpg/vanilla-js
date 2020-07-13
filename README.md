@@ -12,3 +12,4 @@ Vanilla JS projects
 * Array Methods
 * Menu Slider and Modal
 * [Hangman Game](https://hangmanek.netlify.app/"preview")
+* [Meal Finder](https://ekmealfinder.netlify.app/"preview")
