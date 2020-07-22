@@ -16,6 +16,31 @@ const dummyTransactions = [
 
 let transactions = dummyTransactions;
 
+//Add transaction function
+function addTransaction(e) {
+  e.preventDefault();
+
+  if (textInput.value.trim() === "" || amountInput.value.trim() === "") {
+    alert("Please enter text and amount");
+  } else {
+    const transaction = {
+      id: generateID(),
+      text: textInput.value.trim(),
+      amount: +amountInput.value.trim(),
+    };
+
+    transactions.push(transaction);
+
+    addTransactionDOM(transaction);
+    updateAccount();
+  }
+}
+
+//generate randon ID
+function generateID() {
+  return Math.floor(Math.random() * 10000000);
+}
+
 //Add transactions to DOM
 
 function addTransactionDOM(transaction) {
@@ -31,10 +56,21 @@ function addTransactionDOM(transaction) {
 
   item.innerHTML = `
   ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span>
-  <button class="delete-btn">x</button>
+  <button class="delete-btn" onclick="removeTransaction(${
+    transaction.id
+  })">x</button>
   `;
 
   historyEl.appendChild(item);
+}
+
+//delete transaction by ID
+function removeTransaction(transactionID) {
+  transactions = transactions.filter(
+    (transaction) => transaction.id !== transactionID
+  );
+
+  init();
 }
 
 //function to update balance, income and expenses
@@ -49,8 +85,6 @@ function updateAccount() {
     expense.reduce((acc, item) => (acc += item), 0) * -1
   ).toFixed(2);
 
-  console.log(totalExpense);
-  console.log(totalIncome);
   //update DOM
   balanceEl.innerHTML = `GHC${total}`;
   incomeEl.innerHTML = `+GHC${totalIncome}`;
@@ -66,3 +100,6 @@ function init() {
 }
 
 init();
+
+//Add event listener
+addtransBtn.addEventListener("click", addTransaction);
