@@ -8,13 +8,19 @@ const amountInput = document.getElementById("amount");
 const addtransBtn = document.getElementById("add-transaction");
 
 const dummyTransactions = [
+  /* 
   { id: 1, text: "Flower", amount: -20 },
   { id: 2, text: "Book", amount: -30 },
   { id: 3, text: "Salary", amount: 500 },
-  { id: 4, text: "Camera", amount: -100 },
+  { id: 4, text: "Camera", amount: -100 }, */
 ];
 
-let transactions = dummyTransactions;
+const localStorageTransactions = JSON.parse(
+  localStorage.getItem("transactions")
+);
+
+let transactions =
+  localStorage.getItem("transactions") !== null ? localStorageTransactions : [];
 
 //Add transaction function
 function addTransaction(e) {
@@ -31,8 +37,12 @@ function addTransaction(e) {
 
     transactions.push(transaction);
 
+    textInput.value = "";
+    amountInput.value = "";
+
     addTransactionDOM(transaction);
     updateAccount();
+    updateLocalStorage();
   }
 }
 
@@ -69,13 +79,13 @@ function removeTransaction(transactionID) {
   transactions = transactions.filter(
     (transaction) => transaction.id !== transactionID
   );
-
+  updateLocalStorage();
   init();
 }
 
 //function to update balance, income and expenses
 function updateAccount() {
-  const amounts = transactions.map((transaction) => transaction.amount);
+  const amounts = transactions.map((transaction) => transaSction.amount);
 
   const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
   const income = amounts.filter((item) => item > 0);
@@ -87,8 +97,13 @@ function updateAccount() {
 
   //update DOM
   balanceEl.innerHTML = `GHC${total}`;
-  incomeEl.innerHTML = `+GHC${totalIncome}`;
-  expenseEl.innerHTML = `-GHC${totalExpense}`;
+  incomeEl.innerHTML = `GHC${totalIncome}`;
+  expenseEl.innerHTML = `GHC${totalExpense}`;
+}
+
+//Update local storage transactions
+function updateLocalStorage() {
+  localStorage.setItem("transactions", JSON.stringify(transactions));
 }
 
 //Init App
